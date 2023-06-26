@@ -14,7 +14,7 @@ service / on new http:Listener(9090) {
         
         SOAP:Client soapClient = check new ("<SOAP ENDPOINT>");
 
-        xml result = check soapClient->send(payload, {});
+        xml result = check soapClient->send(path, payload, {});
 
         return result;
     }

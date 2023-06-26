@@ -1,5 +1,5 @@
 [package]
 org = "sarindas"
 name = "SOAP"
-version = "0.4.0"
+version = "0.5.0"
 distribution = "2201.5.0"

@@ -270,7 +270,7 @@ dependencies = [
 [[package]]
 org = "sarindas"
 name = "SOAP"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
 	{org = "ballerina", name = "http"}
 ]

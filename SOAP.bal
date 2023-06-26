@@ -14,11 +14,11 @@ public client isolated class Client {
         return;
     }
 
-    remote isolated function send(xml payload, map<string|string[]> headers) returns xml|error {
+    remote isolated function send(string path, xml payload, map<string|string[]> headers) returns xml|error {
 
         headers["Content-Type"] = "application/soap+xml";
 
-        xml postResponse = check self.httpEp->post(path = "", message = payload, headers = headers);
+        xml postResponse = check self.httpEp->post(path = path, message = payload, headers = headers);
 
         return postResponse;
     }
