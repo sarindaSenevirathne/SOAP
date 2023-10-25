@@ -1,15 +1,17 @@
 import ballerina/http;
 
+public type ClientConfiguration record {|
+    *http:ClientConfiguration;
+|};
+
 # Description
 public client isolated class Client {
 
     final http:Client httpEp;
 
-    public isolated function init(string url) returns error? {
+    public isolated function init(string url, *ClientConfiguration config) returns error? {
 
-        self.httpEp = check new (url = url, config = {
-            httpVersion: "1.1"
-        });
+        self.httpEp = check new (url, retrieveHttpClientConfig(config));
 
         return;
     }
@@ -23,5 +25,20 @@ public client isolated class Client {
         return postResponse;
     }
 
+}
+
+isolated function retrieveHttpClientConfig(ClientConfiguration config) returns http:ClientConfiguration {
+    return {
+        httpVersion: "1.1",
+        http1Settings: config.http1Settings,
+        http2Settings: config.http2Settings,
+        timeout: config.timeout,
+        poolConfig: config?.poolConfig,
+        auth: config?.auth,
+        retryConfig: config?.retryConfig,
+        responseLimits: config.responseLimits,
+        secureSocket: config?.secureSocket,
+        circuitBreaker: config?.circuitBreaker
+    };
 }
 

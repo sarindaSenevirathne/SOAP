@@ -12,7 +12,7 @@ service / on new http:Listener(9090) {
 
     resource function post invoke(@http:Payload xml payload) returns xml|error {
         
-        SOAP:Client soapClient = check new ("<SOAP ENDPOINT>");
+        SOAP:Client soapClient = check new ("<SOAP ENDPOINT>", optional soapConfiguration);
 
         xml result = check soapClient->send("", payload, {});
 
